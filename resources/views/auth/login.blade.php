@@ -8,8 +8,6 @@
 <div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
         <div>
-
-
         </div>
         <h3>Welcome to Our Travels </h3>
         <p>Book Your Travel Login here.
@@ -36,6 +34,11 @@
                     @endif
             </div>
             <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+
+       <a class="btn btn-success  block full-width m-b" href="{{ url('/auth/facebook') }}">Login with Facebook</a>
+
+
 
             <a href="{{ route('password.request') }}"><small>Forgot password?</small></a>
             <p class="text-muted text-center"><small>Do not have an account?</small></p>
