@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
-use App\Record;
+use App\Company;
 use PHPHtmlParser\Dom;
 
 class DashboardContoller extends Controller
@@ -15,52 +15,31 @@ class DashboardContoller extends Controller
       if(!Auth::check())
        return redirect('/login');
 
-
-
        return view('dashboard.index');
-
     }
 
     public function getdata()
     {
+        $base_url ='http://www.marketonmobile.com';
+        $page_url =$base_url.'/search.php';
+        $get_content = file_get_contents($page_url);
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($get_content);
+        $xpath = new \DOMXPath($dom);
+        $rowContents = $xpath->query('//div[contains(@class, "table")]//div[contains(@class, "row")] //ul');
+        foreach($rowContents as $key =>$rowContent)
+        {
+          $data['name'] = $rowContents->item($key)->getElementsByTagName('li')->item(0)->textContent;
+          $data['nse_symbol'] = $rowContents->item($key)->getElementsByTagName('li')->item(2)->textContent;
 
-    $base_url ='http://www.marketonmobile.com';
-    $page_url =$base_url.'/search.php';
-    $get_content = file_get_contents($page_url);
+          if($key !=0)
+          {
+            $record = Company::firstOrCreate(array('name' =>$data['name'],'nse_code'=>$data['nse_symbol']));
+            $record->save();
+          }
 
-    $dom = new \DOMDocument();
-
-   libxml_use_internal_errors(true);
-    $dom->loadHTML($get_content);
-
-    $xpath = new \DOMXPath($dom);
-
-    $rowContents = $xpath->query('//div[contains(@class, "table")]//div[contains(@class, "row")] //ul');
-
-    foreach($rowContents as $key =>$rowContent)
-    {
-      // echo "<pre>";print_r($rowContent->textContent) ;echo "<br/>";
-      // echo "<pre>";print_r($rowContent->nodeValue);die;
-      // $name = $xpath->query('//li[contains(@class, "ttl")]//a');
-      // $data['name']=  $name->item($key)->textContent;
-      // $nse_symbol = $xpath->query('//div[contains(@class, "table")]//div[contains(@class, "row")] //ul');
-      //
-      // $data['nse_symbol'] = $nse_symbol->item($key)->getElementsByTagName('li')->item(2)->textContent;
-
-      $data['name'] = $rowContents->item($key)->getElementsByTagName('li')->item(0)->textContent;
-      $data['nse_symbol'] = $rowContents->item($key)->getElementsByTagName('li')->item(2)->textContent;
-
-      if($key !=0){
-        $record = Record::firstOrCreate(array('name' =>$data['name'],'nse_code'=>$data['nse_symbol']));
-        $record->save();
-      }
-
-    }
-    die;
+        }
       return back();
-
-
-
-
     }
 }
