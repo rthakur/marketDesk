@@ -19,7 +19,7 @@ class DashboardContoller extends Controller
 			 where('nse_code','!=','')
 		   ->where('rsi_60min','!=','0')
 		   ->where('rsi_60min','!=','')
-		   ->orderBy('rsi', 'asc')
+		   ->orderBy('rsi_60min', 'asc')
 		   ->paginate(50);
        return view('dashboard.index', ['companies' => $companies]);
     }
