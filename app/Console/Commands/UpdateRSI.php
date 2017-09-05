@@ -77,9 +77,16 @@ class UpdateRSI extends Command
          {
                 $getData = json_decode( $getData, true);
 
-                foreach($getData['Technical Analysis: RSI'] as $key => $value)
-                return isset($value['RSI'])? $value['RSI'] : 0;
-         }
+                if(isset($getData['Technical Analysis: RSI']))
+                {
+                  foreach($getData['Technical Analysis: RSI'] as $key => $value)
+                  return isset($value['RSI'])? $value['RSI'] : 0;
+
+                }else{
+                  \Log::info($getData);
+                }
+
+          }
 
        }catch(\Exception $e){
 
