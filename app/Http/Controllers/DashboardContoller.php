@@ -20,7 +20,7 @@ class DashboardContoller extends Controller
 		   ->where('rsi','!=','0')
 		   ->where('rsi','!=','')
 		   ->orderBy('rsi', 'asc')
-		   ->paginate(100);
+		   ->paginate(50);
        return view('dashboard.index', ['companies' => $companies]);
     }
 
