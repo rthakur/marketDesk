@@ -70,6 +70,7 @@ class UpdateRSI extends Command
     private function getRSI($symbol, $interval = 'daily')
     {
   	   $key = 'JQNNH8OYUYOFTW1W';
+       sleep(10);
        try{
          $getData = file_get_contents('https://www.alphavantage.co/query?function=RSI&symbol='.$symbol.'&interval='.$interval.'&time_period=10&series_type=close&apikey='.$key);
 
