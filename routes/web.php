@@ -1,6 +1,5 @@
 <?php
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('/','DashboardContoller@index');
-Route::get('auth/{provider}', 'AuthController@redirectToProvider');
-Route::get('auth/{provider}/callback', 'AuthController@handleProviderCallback');
 Route::get('getdata', 'DashboardContoller@getdata');
 Auth::routes();

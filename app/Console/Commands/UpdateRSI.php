@@ -43,21 +43,20 @@ class UpdateRSI extends Command
 
        foreach($companyData as $company)
        {
-		   $rsi = $this->getRSI('NSE:'.$company->nse_code, '60min');
-		   $company->rsi_60min = $rsi;
-		   $company->save();
-
-       echo "RSI 60min - updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
-	    }
+  		   $rsi = $this->getRSI('NSE:'.$company->nse_code, '60min');
+  		   $company->rsi_60min = $rsi;
+  		   $company->save();
+         echo "RSI 60min - updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
+	     }
 
 
       foreach($companyData as $company)
       {
-      $rsi = $this->getRSI('NSE:'.$company->nse_code);
-      $company->rsi = $rsi;
-      $company->save();
+        $rsi = $this->getRSI('NSE:'.$company->nse_code);
+        $company->rsi = $rsi;
+        $company->save();
 
-      echo "RSI updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
+        echo "RSI updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
      }
 
 
@@ -71,19 +70,22 @@ class UpdateRSI extends Command
     private function getRSI($symbol, $interval = 'daily')
     {
   	   $key = 'JQNNH8OYUYOFTW1W';
-  	   $getData = @file_get_contents('https://www.alphavantage.co/query?function=RSI&symbol='.$symbol.'&interval='.$interval.'&time_period=10&series_type=close&apikey='.$key);
+       try{
+         $getData = file_get_contents('https://www.alphavantage.co/query?function=RSI&symbol='.$symbol.'&interval='.$interval.'&time_period=10&series_type=close&apikey='.$key);
 
-       if($getData)
-       {
-         $getData = json_decode( $getData, true);
+         if($getData)
+         {
+                $getData = json_decode( $getData, true);
 
-         if(isset($getData['Technical Analysis: RSI']))
-           foreach($getData['Technical Analysis: RSI'] as $key => $value)
+                foreach($getData['Technical Analysis: RSI'] as $key => $value)
+                return isset($value['RSI'])? $value['RSI'] : 0;
+         }
 
-            return isset($value['RSI'])? $value['RSI'] : 0;
+       }catch(\Exception $e){
+
+         \Log::info($e->getMessage());
        }
 
-			return 0;
 	}
 
 }
