@@ -46,6 +46,8 @@ class UpdateRSI extends Command
 		   $rsi = $this->getRSI('NSE:'.$company->nse_code);
 		   $company->rsi = $rsi;
 		   $company->save();
+
+       echo "RSI updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;  
 	    }
 
     }

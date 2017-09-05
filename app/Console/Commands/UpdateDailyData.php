@@ -40,8 +40,12 @@ class UpdateDailyData extends Command
     {
       $companyData = Company::where('nse_code', '!=','')->get();
 
-      foreach($companyData as $company)
+      foreach($companyData as $company){
+
         $rsi = $this->geCompanyData($company);
+
+        echo "DATA updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;  
+      }
 
     }
 
