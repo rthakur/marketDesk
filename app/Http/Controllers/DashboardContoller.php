@@ -16,9 +16,9 @@ class DashboardContoller extends Controller
        return redirect('/login');
 
        $companies = Company::
-			where('nse_code','!=','')
-		   ->where('rsi','!=','0')
-		   ->where('rsi','!=','')
+			 where('nse_code','!=','')
+		   ->where('rsi_60min','!=','0')
+		   ->where('rsi_60min','!=','')
 		   ->orderBy('rsi', 'asc')
 		   ->paginate(50);
        return view('dashboard.index', ['companies' => $companies]);
