@@ -28,6 +28,7 @@ class CreateCompaniesTable extends Migration
             $table->string('book_value')->nullable();
             $table->string('market_cap')->nullable();
             $table->string('rsi')->nullable();
+            $table->string('rsi_60min')->nullable();
             $table->timestamps();
         });
     }

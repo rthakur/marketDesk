@@ -54,7 +54,9 @@
                                    <th>OHLC</th>
                                    <th>Change</th>
                                    <th>Volume</th>
-                                   <th>RSI</th>
+                                   <th>RSI 1h</th>
+                                   <th>RSI Day</th>
+
                                </tr>
                                </thead>
                                <tbody>
@@ -77,6 +79,7 @@
                                        </td>
                                        <td>{{$company->change}}</td>
                                        <td>{{$company->volume}}</td>
+                                       <td>{{$company->rsi_60min}}</td>
                                        <td>{{$company->rsi}}</td>
                                    </tr>
                                  @endforeach

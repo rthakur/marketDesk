@@ -43,12 +43,24 @@ class UpdateRSI extends Command
 
        foreach($companyData as $company)
        {
-		   $rsi = $this->getRSI('NSE:'.$company->nse_code);
-		   $company->rsi = $rsi;
+		   $rsi = $this->getRSI('NSE:'.$company->nse_code, '60min');
+		   $company->rsi_60min = $rsi;
 		   $company->save();
 
-       echo "RSI updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;  
+       echo "RSI 60min - updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
 	    }
+
+
+      foreach($companyData as $company)
+      {
+      $rsi = $this->getRSI('NSE:'.$company->nse_code);
+      $company->rsi = $rsi;
+      $company->save();
+
+      echo "RSI updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
+     }
+
+
 
     }
 
