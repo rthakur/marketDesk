@@ -73,7 +73,7 @@
                                        <td></td>
                                        <td></td>
                                        <td></td>
-                                       <td></td>
+                                       <td>{{$company->rsi}}</td>
                                    </tr>
                                  @endforeach
                                </tbody>
