@@ -69,10 +69,14 @@
                                          <p>H/L 52 Weeks:</p>
                                          <p>Market Cap:</p>
                                        </td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
+                                      <td>
+                                          Open: {{$company->open}}<br><br>
+                                          Close: {{$company->close}}<br><br>
+                                          High: {{$company->high}}<br><br>
+                                          Low: {{$company->low}}<br><br>
+                                       </td>
+                                       <td>{{$company->change}}</td>
+                                       <td>{{$company->volume}}</td>
                                        <td>{{$company->rsi}}</td>
                                    </tr>
                                  @endforeach
