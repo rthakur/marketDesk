@@ -6,8 +6,8 @@
     <title>Stock Desk</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body class="">
     <div id="wrapper">
@@ -25,6 +25,6 @@
   <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
   <!-- Custom and plugin javascript -->
   <script src="/assets/js/inspinia.js"></script>
-  <script src="/assets/js/plugins/pace/pace.min.js"></script>
+  <!-- <script src="/assets/js/plugins/pace/pace.min.js"></script> -->
 </body>
 </html>

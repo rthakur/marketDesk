@@ -24,6 +24,35 @@ class DashboardContoller extends Controller
        return view('dashboard.index', ['companies' => $companies]);
     }
 
+
+    public function manage()
+    {
+      if(!Auth::check())
+       return redirect('/login');
+
+       $companies = Company::paginate(50);
+       return view('dashboard.list', ['companies' => $companies]);
+    }
+
+    public function getEditCompany($compayId)
+    {
+    //  echo $compayId;die;
+
+      return view('company.edit',['id' => $compayId]);
+    }
+
+public function postEditCompany(Request $request)
+{
+
+  $company = Company::where('id',$request->id)->first();
+
+  $company->market_cap_type = $request->market_cap_type;
+  $company->save();
+  return redirect('manage');
+
+
+}
+
     public function getdata()
     {
         $base_url ='http://www.marketonmobile.com';
@@ -48,4 +77,7 @@ class DashboardContoller extends Controller
         }
       return back();
     }
+
+
+
 }
