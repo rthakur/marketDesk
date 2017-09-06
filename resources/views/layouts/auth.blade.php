@@ -30,6 +30,9 @@
 .text-muted {
     color: #fff7f7;
 }
+.form-control, .single-line {
+    color: #000;
+  }
    </style>
 </head>
 
