@@ -7,7 +7,7 @@
 <div class="middle-box text-center loginscreen   animated fadeInDown">
      <div>
 
-         <h3>StockDesk</h3>
+         <h3>MarketDesk</h3>
          <form class="m-t" method="POST" action="{{ route('register') }}">
              {{ csrf_field() }}
            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

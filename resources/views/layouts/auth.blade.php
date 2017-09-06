@@ -6,15 +6,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Stock Desk | Login</title>
+    <title>MarketDesk | Login</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <style>
       .gray-bg{
-          background-color: #2f2f6d !important;
+          background-color: #53f !important;
         }
+        body {
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #2f4050;
+    font-size: 18px;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+.btn-white {
+    color: #000;
+    background: white;
+    border: 1px solid #e7eaec;
+}
+.text-muted {
+    color: #fff7f7;
+}
    </style>
 </head>
 

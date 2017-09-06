@@ -9,7 +9,7 @@
     <div>
         <div>
         </div>
-        <h3>Stock Desk</h3>
+        <h3>MarketDesk</h3>
         <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
