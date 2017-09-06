@@ -43,18 +43,15 @@ class UpdateRSI extends Command
 
        foreach($companyData as $company)
        {
-  		   $rsi = $this->getRSI('NSE:'.$company->nse_code, '60min');
-  		   $company->rsi_60min = $rsi;
-  		   $company->save();
+  		   $rsi = $this->getRSI($company, '60min');
+  		 
          echo "RSI 60min - updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
 	     }
 
 
       foreach($companyData as $company)
       {
-        $rsi = $this->getRSI('NSE:'.$company->nse_code);
-        $company->rsi = $rsi;
-        $company->save();
+        $rsi = $this->getRSI($company,'daily');
 
         echo "RSI updated for ".$company->id.'- '.$company->nse_code.PHP_EOL;
      }
@@ -67,33 +64,48 @@ class UpdateRSI extends Command
 
 
 
-    private function getRSI($symbol, $interval = 'daily')
+    private function getRSI($company, $interval = 'daily')
     {
-  	   $key = 'JQNNH8OYUYOFTW1W';
-       sleep(10);
-       try{
-         $getData = file_get_contents('https://www.alphavantage.co/query?function=RSI&symbol='.$symbol.'&interval='.$interval.'&time_period=10&series_type=close&apikey='.$key);
+  
 
-         if($getData)
-         {
-                $getData = json_decode( $getData, true);
+   $key = 'JQNNH8OYUYOFTW1W';
+   $symbol = "NSE:".$company->nse_code;
+   
+    try{
 
-                if(isset($getData['Technical Analysis: RSI']))
-                {
+	$url = 'https://www.alphavantage.co/query?function=RSI&symbol='.$symbol.'&interval='.$interval.'&time_period=10&series_type=close&apikey='.$key;
+	$getData = file_get_contents($url);
+	$getData = json_decode( $getData, true);
+
+	if(empty(count($getData))){
+ 	    $getData = file_get_contents(str_replace('NSE:','',$url));
+   	    $getData = json_decode( $getData, true);
+	}
+
+               
+		 if(isset($getData['Technical Analysis: RSI']))
+               	 {
                   foreach($getData['Technical Analysis: RSI'] as $key => $value)
-                  return isset($value['RSI'])? $value['RSI'] : 0;
+				{
+	
+				if($interval == '60min')
+					$company->rsi_60min = $value['RSI'];
+				else
+					$company->rsi = $value['RSI'];
+				
 
-                }else{
+				$company->save();
+
+				return "Sucess";
+	               		}
+		 }else{
                   \Log::info($getData);
                 }
 
-          }
+          
 
        }catch(\Exception $e){
-
          \Log::info($e->getMessage());
        }
-
-	}
-
+  }
 }
