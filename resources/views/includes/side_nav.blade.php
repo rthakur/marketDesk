@@ -11,6 +11,7 @@
               </li>
             <li>
                 <a href="/"><i class="fa fa-laptop"></i> <span class="nav-label">Companies</span></a>
+                  <a href="/manage"><i class="fa fa-laptop"></i> <span class="nav-label">Manage Companies</span></a>
             </li>
         </ul>
     </div>
