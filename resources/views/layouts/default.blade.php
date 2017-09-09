@@ -8,6 +8,12 @@
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <style>
+    .active{
+      background: #3a3939;
+      color: #fff !important;
+    }
+    </style>
 </head>
 <body class="">
     <div id="wrapper">
