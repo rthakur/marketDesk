@@ -19,10 +19,10 @@ class CreatePortfoliosTable extends Migration
             $table->integer('user_id');
             $table->integer('company_id');
             $table->integer('qty')->default(0);
-            $table->integer('cmp')->default(0);
-            $table->integer('acp')->default(0);
-            $table->integer('book_loss')->default(0);
-            $table->integer('target')->default(0);
+            $table->string('cmp')->default(0);
+            $table->string('acp')->default(0);
+            $table->string('book_loss')->default(0);
+            $table->string('target')->default(0);
             $table->integer('type')->default(0);
             $table->timestamps();
         });
