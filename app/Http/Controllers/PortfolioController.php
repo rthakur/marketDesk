@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Portfolio;
+use Auth;
 class PortfolioController extends Controller
 {
     /**
@@ -13,7 +15,15 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        return view('portfolio.index');
+
+        if(\Request::segment(2) == 'future')
+        {
+          $portfolio = Portfolio::where('type',1)->where('user_id', Auth::id())->get();
+          return view('portfolio.future', ['portfolios' => $portfolio]);
+        }
+
+        $portfolio = Portfolio::where('type',0)->where('user_id', Auth::id())->get();
+        return view('portfolio.index', ['portfolios' => $portfolio]);
     }
 
     /**
@@ -23,7 +33,13 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        //
+      return view('portfolio.form');
+    }
+
+
+    public function futureCreate()
+    {
+      return view('portfolio.future_form');
     }
 
     /**
@@ -34,7 +50,32 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+      $p = new Portfolio;
+      $p->user_id = Auth::id();
+      $p->acp = $request->acp;
+      $p->qty = $request->qty;
+      $p->target = $request->target;
+      $p->book_loss = $request->exit;
+      $p->company_id = $request->company_id;
+      $p->save();
+
+      return redirect('portfolio');
+    }
+
+
+    public function futureStore(Request $request)
+    {
+
+      $p = new Portfolio;
+      $p->user_id = Auth::id();
+      $p->target = $request->target;
+      $p->type = 1;
+      $p->company_id = $request->company_id;
+      $p->save();
+
+      return redirect('portfolio/future');
+
     }
 
     /**
@@ -79,6 +120,7 @@ class PortfolioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Portfolio::where('id', $id)->where('user_id', Auth::id())->delete();
+        return back();
     }
 }
