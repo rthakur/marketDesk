@@ -1,7 +1,6 @@
 <?php
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('/','DashboardContoller@index');
-
 // Route::get('import',function()
 // {
 //   $csv = array_map('str_getcsv', file('ind_nifty500list.csv'));

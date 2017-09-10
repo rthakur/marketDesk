@@ -3,29 +3,24 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Company;
 
-class UpdateRSI extends Command
+class UpdateRSI1day extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'update:rsi';
+    protected $signature = 'update:rsi-day';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update RSI';
+    protected $description = 'Command description';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         parent::__construct();
@@ -84,7 +79,7 @@ class UpdateRSI extends Command
 
                   foreach($getData['Technical Analysis: RSI'] as $key => $value)
                       {
-                      $company->rsi_60min = $value['RSI'];
+                      $company->rsi = $value['RSI'];
                       $company->save();
                       return "Sucess";
                       }
@@ -97,4 +92,6 @@ class UpdateRSI extends Command
              \Log::info($e->getMessage());
            }
   }
+
+
 }

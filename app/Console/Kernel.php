@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\UpdateRSI',
-        'App\Console\Commands\UpdateDailyData'
+        'App\Console\Commands\UpdateDailyData',
+        'App\Console\Commands\UpdateRSI1day'
     ];
 
     /**
@@ -25,8 +26,25 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('update:rsi')
-                  ->daily();
+
+      if(!in_array(date('D'), ['Sun','Sat']))
+      {
+
+        $hour = date('H');
+
+        if( $hour >= 9 && $hour <= 16 )
+        {
+
+          $schedule->command('update:rsi')
+          ->hourly();
+
+          $schedule->command('update:rsi-day')
+          ->daily();
+          
+        }
+
+      }
+
     }
 
     /**
