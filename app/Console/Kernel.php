@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
 
         $hour = date('H');
 
-        if( $hour >= 9 && $hour <= 16 )
+        if( $hour >= 10 && $hour <= 16 )
         {
 
           $schedule->command('update:rsi')
@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
 
           $schedule->command('update:rsi-day')
           ->daily();
-          
+
         }
 
       }
