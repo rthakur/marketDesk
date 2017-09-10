@@ -8,13 +8,12 @@ Route::group([ 'middleware'=>'auth'],function()
   Route::get('portfolio/future', 'PortfolioController@index');
   Route::post('portfolio/future', 'PortfolioController@index');
 
-  Route::get('portfolio/remove/{id}', 'PortfolioController@destroy');
   Route::get('portfolio/future/create', 'PortfolioController@futureCreate');
+  Route::get('portfolio/remove/{id}', 'PortfolioController@destroy');
+
   Route::post('portfolio/future/store', 'PortfolioController@futureStore');
-
-
-
   Route::resource('portfolio', 'PortfolioController');
+
 
   Route::get('getdata', 'DashboardContoller@getdata');
   Route::get('manage','ManagecompanyController@manage');

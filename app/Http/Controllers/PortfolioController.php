@@ -72,6 +72,7 @@ class PortfolioController extends Controller
       $p->target = $request->target;
       $p->type = 1;
       $p->company_id = $request->company_id;
+      $p->acp = $request->acp;
       $p->save();
 
       return redirect('portfolio/future');

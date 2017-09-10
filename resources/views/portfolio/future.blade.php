@@ -24,6 +24,7 @@
                                <tr>
                                    <th>Name</th>
                                    <th>CMP</th>
+                                   <th>Entry Price</th>
                                    <th>Target Price</th>
                                    <th>RSI</th>
                                    <th>Volume</th>
@@ -38,6 +39,7 @@
                                            <b>{{$portfolio->getCompany->nse_code}}</b>
                                          </td>
                                          <td>CMP</td>
+                                         <td>{{$portfolio->acp}}</td>
                                          <td>{{$portfolio->target}}</td>
                                          <td>
                                            Hour RSI: {{$portfolio->getCompany->rsi_60min}}<br>

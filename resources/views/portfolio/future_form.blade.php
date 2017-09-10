@@ -17,6 +17,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="control-label col-sm-3" for="pwd">Entry Price:</label>
+            <div class="col-sm-9" >
+              <input type="number"  class="form-control" name="acp" step=any required>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="control-label col-sm-3" for="pwd">Target Price:</label>
             <div class="col-sm-9" >
               <input type="number"  class="form-control" name="target" step=any required>
