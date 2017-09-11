@@ -10,18 +10,30 @@ use PHPHtmlParser\Dom;
 
 class DashboardContoller extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
       if(!Auth::check())
        return redirect('/login');
+      $data['industrys'] = Company::groupBy('industry')->pluck('industry');
 
-       $companies = Company::
-			 where('nse_code','!=','')
-		   ->where('rsi_60min','!=','0')
-		   ->where('rsi_60min','!=','')
-		   ->orderBy('rsi_60min', 'asc')
-		   ->paginate(50);
-       return view('dashboard.index', ['companies' => $companies]);
+      $companies = Company::
+        where('nse_code','!=','')
+        ->where('rsi_60min','!=','0')
+        ->where('rsi_60min','!=','')
+        ->orderBy('rsi_60min', 'asc');
+
+      if($request->industry)
+         $companies = $companies->where('industry' ,'=' ,$request->industry);
+
+
+      if($request->volume)
+         $companies = $companies->where('volume' ,'>=' ,$request->volume * 100000);
+
+
+
+      $data['companies'] = $companies->paginate(50);
+
+       return view('dashboard.index',$data);
     }
 
     public function getdata()
