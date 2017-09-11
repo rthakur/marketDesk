@@ -30,12 +30,16 @@ class Kernel extends ConsoleKernel
       if(!in_array(date('D'), ['Sun','Sat']))
       {
 
+//\Log::info('Test');
+
         $hour = date('H');
 
         if( $hour >= 10 && $hour <= 16 )
         {
 
-          $schedule->command('update:rsi')
+//	\Log::info('test');
+  
+        $schedule->command('update:rsi')
           ->hourly();
 
           $schedule->command('update:rsi-day')
