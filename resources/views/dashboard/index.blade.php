@@ -15,19 +15,7 @@
                           <div class="col-lg-4">
                              <h5>Companies </h5>
                           </div>
-                          <div class="col-lg-4 col-lg-offset-4">
-                            <div class="row">
-                              <form method="get" action="/">
-                                  <div class="col-lg-8">
-                                     <input type="text" name="allsearch" class="form-control" value="{{ (isset($_GET['allsearch'])? $allsearch : ''}}">
-                                  </div>
-                                  <div class="col-lg-4">
-                                        <button type="submit" class="btn btn-primary" ><i class="fa fa-search" aria-hidden="true"></i></button>
-                                  </div>
-                                </form>
-                           </div>
-                         </div>
-                        </div>
+                      </div>
                    </div>
 
 
@@ -35,7 +23,7 @@
                        <div class="row">
                         <form method="get" action="/">
                           @if(count($industrys) > 1)
-                           <div class="col-sm-4 m-b-xs">
+                           <div class="col-sm-3 m-b-xs">
                                  <select class="input-sm form-control input-s-sm inline" name="industry">
                                    <option value="">Select Industry</option>
                                      @foreach($industrys as $industry)
@@ -44,12 +32,19 @@
                                 </select>
                            </div>
                            @endif
-                           <div class="col-sm-4 m-b-xs">
+                           <div class="col-sm-3 m-b-xs">
                                  <select class="input-sm form-control input-s-sm inline" name="volume">
                                    <option value="">Select Volume</option>
                                    @foreach([1,5,10,15,20,30,40,50,60,70,80 ] as $vol)
                                       <option value="{{$vol}}" {{ (isset($_GET['volume']) && $_GET['volume'] == $vol )? 'selected' : ''}}>greater than {{$vol}} lakh  </option>
                                    @endforeach
+                                  </select>
+                           </div>
+                           <div class="col-sm-3 m-b-xs">
+                                 <select class="input-sm form-control input-s-sm inline" name="rsi">
+                                   <option value="">RSI</option>
+                                      <option value="hour" {{ (isset($_GET['rsi']) && $_GET['rsi'] == 'hour' )? 'selected' : ''}}>RSI Hour</option>
+                                      <option value="day" {{ (isset($_GET['rsi']) && $_GET['rsi'] == 'day' )? 'selected' : ''}}>RSI Day</option>
                                   </select>
                            </div>
                            <button type="submit"  class="btn btn-primary"> Search</button>

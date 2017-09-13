@@ -13,6 +13,9 @@
       background: #3a3939;
       color: #fff !important;
     }
+    select.input-sm {
+    height: 38px;
+  }
     </style>
 </head>
 <body class="">

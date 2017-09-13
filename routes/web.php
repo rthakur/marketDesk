@@ -1,7 +1,6 @@
 <?php
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('/','DashboardContoller@index');
-Route::get('marcketdata','DashboardContoller@marcketdata');
 // Route::get('import',function()
 // {
 //   $csv = array_map('str_getcsv', file('ind_nifty500list.csv'));
@@ -37,7 +36,7 @@ Route::group([ 'middleware'=>'auth'],function()
 
 
 
-//  Route::get('getdata', 'DashboardContoller@getdata');
+  Route::get('getdata', 'DashboardContoller@getdata');
   Route::get('manage','ManagecompanyController@manage');
   Route::get('company/edit/{companyId}', 'ManagecompanyController@getEditCompany');
   Route::post('company/edit', 'ManagecompanyController@postEditCompany');

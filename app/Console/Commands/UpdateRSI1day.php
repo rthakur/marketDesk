@@ -33,7 +33,7 @@ class UpdateRSI1day extends Command
      */
     public function handle()
     {
-       $companyData = Company::where('nse_code', '!=','')->get();
+       $companyData = Company::where('nse_code', '!=','')->where('nsc_500', 1)->get();
 
 
        foreach($companyData as $company)

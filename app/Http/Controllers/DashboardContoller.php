@@ -21,7 +21,15 @@ class DashboardContoller extends Controller
         where('nse_code','!=','')
         ->where('rsi_60min','!=','0')
         ->where('rsi_60min','!=','')
-        ->orderBy('rsi_60min', 'asc');
+        ->where('nsc_500', 1);
+
+
+
+
+      if($request->rsi == 'day')
+      $companies = $companies->orderBy('rsi', 'asc');
+      else
+      $companies = $companies->orderBy('rsi_60min', 'asc');
 
       if($request->industry)
          $companies = $companies->where('industry' ,'=' ,$request->industry);
@@ -60,30 +68,11 @@ class DashboardContoller extends Controller
 
           if($key !=0)
           {
-            $record = Company::firstOrCreate(array('name' =>$data['name'],'nse_code'=>$data['nse_symbol']));
+            $record = Company::firstOrCreate(array('nse_code'=>$data['nse_symbol']));
             $record->save();
           }
 
         }
       return back();
     }
-
-    public function marcketdata()
-    {
-
-
-      $http = new GuzzleHttp\Client;
-
-        $response = $http->get('https://www.quandl.com/api/v3/datasets/NSE/HDFC.json', [
-       'form_params' => [
-         'api_key' => 'xMH7BiBu6s24LHCizug3',
-        ],
-     ]);
-
-   return json_decode((string) $response->getBody(), true);
-
-    }
-
-
-
 }
