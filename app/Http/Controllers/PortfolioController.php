@@ -124,4 +124,26 @@ class PortfolioController extends Controller
         Portfolio::where('id', $id)->where('user_id', Auth::id())->delete();
         return back();
     }
+
+    public function getsold()
+    {
+      $portfolio = Portfolio::where('type',2)->where('user_id', Auth::id())->get();
+
+      return view('portfolio.sold.index',['portfolios'=>$portfolio]);
+    }
+    public function soldCreate()
+    {
+      return view('portfolio.sold.form');
+    }
+    public function soldStore(Request $request)
+    {
+      $p = new Portfolio;
+      $p->user_id = Auth::id();
+      $p->type = 2;
+      $p->company_id = $request->company_id;
+      $p->acp = $request->acp;
+      $p->save();
+
+      return redirect('portfolio/sold');
+    }
 }

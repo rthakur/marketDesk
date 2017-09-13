@@ -18,9 +18,10 @@ $activePage = Request::segment(1);
                 @if(Auth::user()->email == 'rthakur.dev@gmail.com')
                 <a href="/manage" @if($activePage == 'manage') class="active" @endif ><span class="nav-label">Manage Companies</span></a>
                 @endif
-                
-                <a href="/portfolio" @if($activePage == 'portfolio' &&  Request::segment(2) != 'future' ) class="active" @endif ><span class="nav-label">Active Portfolio</span></a>
+                <a href="/portfolio" @if($activePage == 'portfolio' &&  Request::segment(2) == '' ) class="active" @endif ><span class="nav-label">Active Portfolio</span></a>
                 <a href="/portfolio/future" @if($activePage == 'portfolio' &&  Request::segment(2) == 'future' ) class="active" @endif><span class="nav-label">Future Portfolio</span></a>
+                <a href="/portfolio/sold" @if($activePage == 'portfolio' &&  Request::segment(2) == 'sold' ) class="active" @endif><span class="nav-label">Sold Portfolio</span></a>
+
             </li>
         </ul>
     </div>

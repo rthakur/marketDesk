@@ -1,6 +1,7 @@
 <?php
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('/','DashboardContoller@index');
+Route::get('marcketdata','DashboardContoller@marcketdata');
 // Route::get('import',function()
 // {
 //   $csv = array_map('str_getcsv', file('ind_nifty500list.csv'));
@@ -25,7 +26,16 @@ Route::group([ 'middleware'=>'auth'],function()
   Route::get('portfolio/remove/{id}', 'PortfolioController@destroy');
 
   Route::post('portfolio/future/store', 'PortfolioController@futureStore');
+
+  Route::get('portfolio/sold', 'PortfolioController@getsold');
+  Route::get('portfolio/sold/create', 'PortfolioController@soldCreate');
+  Route::post('portfolio/sold/store', 'PortfolioController@soldStore');
+
   Route::resource('portfolio', 'PortfolioController');
+
+
+
+
 
 //  Route::get('getdata', 'DashboardContoller@getdata');
   Route::get('manage','ManagecompanyController@manage');

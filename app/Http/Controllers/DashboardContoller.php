@@ -12,6 +12,7 @@ class DashboardContoller extends Controller
 {
     public function index(Request $request)
     {
+
       if(!Auth::check())
        return redirect('/login');
       $data['industrys'] = Company::groupBy('industry')->pluck('industry');
@@ -28,6 +29,12 @@ class DashboardContoller extends Controller
 
       if($request->volume)
          $companies = $companies->where('volume' ,'>=' ,$request->volume * 100000);
+
+        if(isset($request->allsearch) && $request->allsearch)
+          $companies =  $companies
+                        ->where('industry', 'LIKE', "%$request->allsearch%")
+                        ->orWhere('name', 'LIKE', "%$request->allsearch%")
+                        ->orWhere('nse_code', 'LIKE', "%$request->allsearch%");
 
 
 
@@ -59,6 +66,22 @@ class DashboardContoller extends Controller
 
         }
       return back();
+    }
+
+    public function marcketdata()
+    {
+
+
+      $http = new GuzzleHttp\Client;
+
+        $response = $http->get('https://www.quandl.com/api/v3/datasets/NSE/HDFC.json', [
+       'form_params' => [
+         'api_key' => 'xMH7BiBu6s24LHCizug3',
+        ],
+     ]);
+
+   return json_decode((string) $response->getBody(), true);
+
     }
 
 

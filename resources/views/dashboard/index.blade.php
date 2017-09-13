@@ -11,8 +11,26 @@
            <div class="col-lg-12">
                <div class="ibox float-e-margins">
                    <div class="ibox-title">
-                       <h5>Companies </h5>
+                      <div class="row">
+                          <div class="col-lg-4">
+                             <h5>Companies </h5>
+                          </div>
+                          <div class="col-lg-4 col-lg-offset-4">
+                            <div class="row">
+                              <form method="get" action="/">
+                                  <div class="col-lg-8">
+                                     <input type="text" name="allsearch" class="form-control" value="{{ (isset($_GET['allsearch'])? $allsearch : ''}}">
+                                  </div>
+                                  <div class="col-lg-4">
+                                        <button type="submit" class="btn btn-primary" ><i class="fa fa-search" aria-hidden="true"></i></button>
+                                  </div>
+                                </form>
+                           </div>
+                         </div>
+                        </div>
                    </div>
+
+
                    <div class="ibox-content">
                        <div class="row">
                         <form method="get" action="/">
