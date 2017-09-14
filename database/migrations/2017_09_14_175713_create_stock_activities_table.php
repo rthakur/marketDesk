@@ -17,30 +17,35 @@ class CreateStockActivitiesTable extends Migration
               $table->increments('id');
               $table->integer('company_id');
 
-              $table->decimal('open_7days', 5, 2)->default(0);
-              $table->decimal('open_2weeks', 5, 2)->default(0);
-              $table->decimal('open_1month', 5, 2)->default(0);
-              $table->decimal('open_3months', 5, 2)->default(0);
+              $table->decimal('open_7days', 10, 2)->default(0);
+              $table->decimal('open_2weeks', 10, 2)->default(0);
+              $table->decimal('open_1month', 10, 2)->default(0);
+              $table->decimal('open_2months', 10, 2)->default(0);
+              $table->decimal('open_3months', 10, 2)->default(0);
 
-              $table->decimal('high_7days', 5, 2)->default(0);
-              $table->decimal('high_2weeks', 5, 2)->default(0);
-              $table->decimal('high_1month', 5, 2)->default(0);
-              $table->decimal('high_3months', 5, 2)->default(0);
+              $table->decimal('high_7days', 10, 2)->default(0);
+              $table->decimal('high_2weeks', 10, 2)->default(0);
+              $table->decimal('high_1month', 10, 2)->default(0);
+              $table->decimal('high_2months', 10, 2)->default(0);
+              $table->decimal('high_3months', 10, 2)->default(0);
 
-              $table->decimal('low_7days', 5, 2)->default(0);
-              $table->decimal('low_2weeks', 5, 2)->default(0);
-              $table->decimal('low_1month', 5, 2)->default(0);
-              $table->decimal('low_3months', 5, 2)->default(0);
+              $table->decimal('low_7days', 10, 2)->default(0);
+              $table->decimal('low_2weeks', 10, 2)->default(0);
+              $table->decimal('low_1month', 10, 2)->default(0);
+              $table->decimal('low_2months', 10, 2)->default(0);
+              $table->decimal('low_3months', 10, 2)->default(0);
 
-              $table->decimal('close_7days', 5, 2)->default(0);
-              $table->decimal('close_2weeks', 5, 2)->default(0);
-              $table->decimal('close_1month', 5, 2)->default(0);
-              $table->decimal('close_3months', 5, 2)->default(0);
+              $table->decimal('close_7days', 10, 2)->default(0);
+              $table->decimal('close_2weeks', 10, 2)->default(0);
+              $table->decimal('close_1month', 10, 2)->default(0);
+              $table->decimal('close_2months', 10, 2)->default(0);
+              $table->decimal('close_3months', 10, 2)->default(0);
 
 
               $table->integer('vol_7days')->default(0);
               $table->integer('vol_2weeks')->default(0);
               $table->integer('vol_1month')->default(0);
+              $table->integer('vol_2months')->default(0);
               $table->integer('vol_3months')->default(0);
 
               $table->timestamps();
