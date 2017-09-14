@@ -17,6 +17,12 @@ Route::get('test', function(){
 
       $trArray[] = ['date','open','high','low','close'];
 
+      $openArray = [];
+      $highArray = [];
+      $lowArray = [];
+      $closeArray = [];
+      $volumnArray = [];
+
       if($pokemon_row->length > 0)
       {
 
@@ -24,18 +30,37 @@ Route::get('test', function(){
           {
               $cells = $row -> getElementsByTagName('td');
               $tdArray = [];
-              foreach ($cells as $cell)
+
+              foreach ($cells as $key => $cell)
               {
+
+                if($key == '1')
+                array_push($openArray, $cell->nodeValue);
+
+                if($key == '2')
+                array_push($highArray, $cell->nodeValue);
+
+                if($key == '3')
+                array_push($lowArray, $cell->nodeValue);
+
+                if($key == '4')
+                array_push($closeArray, $cell->nodeValue);
+
+                if($key == '5')
+                array_push($volumnArray, $cell->nodeValue);
+
                 $tdArray[] = $cell->nodeValue;
               }
+
               if(count($tdArray))
               $trArray[] = $tdArray;
           }
       }
 
-
       echo '<pre>';
-      print_r($trArray);
+    //  print_r($trArray);
+
+      print_r($openArray);
 
   }
 
