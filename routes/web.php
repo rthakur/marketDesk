@@ -1,6 +1,49 @@
 <?php
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('/','DashboardContoller@index');
+
+Route::get('test', function(){
+  $html = file_get_contents('https://finance.google.com/finance/historical?q=NSE:PNB&num=90'); //get the html returned from the following url
+
+  $pokemon_doc = new DOMDocument();
+  libxml_use_internal_errors(TRUE); //disable libxml errors
+  if(!empty($html)){ //if any html is actually returned
+    $pokemon_doc->loadHTML($html);
+    libxml_clear_errors(); //remove errors for yucky html
+    $pokemon_xpath = new DOMXPath($pokemon_doc);
+    //get all the h2's with an id
+      $classname="historical_price";
+      $pokemon_row = $pokemon_xpath->query("//*[contains(@class, '$classname')] //tr");
+
+      $trArray[] = ['date','open','high','low','close'];
+
+      if($pokemon_row->length > 0)
+      {
+
+          foreach($pokemon_row as $row)
+          {
+              $cells = $row -> getElementsByTagName('td');
+              $tdArray = [];
+              foreach ($cells as $cell)
+              {
+                $tdArray[] = $cell->nodeValue;
+              }
+              if(count($tdArray))
+              $trArray[] = $tdArray;
+          }
+      }
+
+
+      echo '<pre>';
+      print_r($trArray);
+
+  }
+
+
+
+});
+
+
 // Route::get('import',function()
 // {
 //   $csv = array_map('str_getcsv', file('ind_nifty500list.csv'));
